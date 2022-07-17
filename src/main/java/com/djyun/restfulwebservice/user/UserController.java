@@ -1,9 +1,10 @@
 package com.djyun.restfulwebservice.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,4 +26,16 @@ public class UserController {
         return service.findOne(id);
     }
 
+    @PostMapping("/users")
+    public ResponseEntity<User> createUser(@RequestBody User user){ // client -> Html form 데이터 등이 아닌 json,xml 등 object 타입으로 데이터를 받기 위함
+        User savedUser = service.save(user);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedUser.getId())
+                .toUri();
+
+        // 적절한 상태 코드 관리, 클라이언트 측 네트워크 비용 줄이기
+        return ResponseEntity.created(location).build();
+    }
 }
