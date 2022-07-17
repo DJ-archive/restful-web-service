@@ -1,4 +1,4 @@
-package com.djyun.restfulwebservice;
+package com.djyun.restfulwebservice.helloworld;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

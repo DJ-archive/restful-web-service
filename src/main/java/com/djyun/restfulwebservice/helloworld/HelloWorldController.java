@@ -1,4 +1,4 @@
-package com.djyun.restfulwebservice;
+package com.djyun.restfulwebservice.helloworld;
 
 import org.springframework.web.bind.annotation.*;
 
